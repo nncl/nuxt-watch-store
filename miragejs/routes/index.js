@@ -6,6 +6,7 @@
 
 export default function routes() {
   this.namespace = 'api';
+  this.timing = 5000; // ms
 
   /*
    * A resource comprises all operations for a CRUD
