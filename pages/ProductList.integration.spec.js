@@ -60,4 +60,20 @@ describe('Product List - integration', () => {
     const cards = wrapper.findAllComponents(ProductCard);
     expect(cards).toHaveLength(10);
   });
+
+  it('should return an error when Promise rejects', async () => {
+    axios.get.mockReturnValue(
+      Promise.reject(new Error('Error getting products'))
+    );
+
+    const wrapper = mount(ProductList, {
+      mocks: {
+        $axios: axios,
+      },
+    });
+
+    await Vue.nextTick();
+
+    expect(wrapper.text()).toContain('Error getting products');
+  });
 });
