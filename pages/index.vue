@@ -33,7 +33,7 @@ export default {
   },
   async created() {
     try {
-      this.products = (await this.$axios.$get('api/products')).products;
+      this.products = (await this.$axios.get('/api/products')).data.products;
     } catch (e) {
       const { message = 'Error listing products!' } = e || {};
       this.errorMessage = message;
