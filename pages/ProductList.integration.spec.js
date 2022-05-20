@@ -71,8 +71,8 @@ describe('Product List - integration', () => {
     expect(wrapper.findComponent(Search)).toBeDefined();
   });
 
-  it('should have the Search component as a child', () => {
-    const { wrapper } = mount(ProductList);
+  it('should have the Search component as a child', async () => {
+    const { wrapper } = await mountProductList();
     expect(wrapper.findComponent(Search)).toBeDefined();
   });
 
