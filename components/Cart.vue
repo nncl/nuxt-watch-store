@@ -24,7 +24,8 @@
       </button>
     </div>
     <hr class="my-3" />
-    <cart-item />
+    <cart-item v-for="product in products" :key="product.id" />
+    <h3 v-if="!hasProducts">Cart is empty</h3>
     <a
       class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
     >
@@ -53,6 +54,15 @@ export default {
     isOpen: {
       type: Boolean,
       default: false,
+    },
+    products: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  computed: {
+    hasProducts() {
+      return this.products.length;
     },
   },
   methods: {

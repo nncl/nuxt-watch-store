@@ -32,4 +32,10 @@ describe('Cart - unit', () => {
 
     expect(wrapper.classes()).not.toContain('hidden');
   });
+
+  it('should display "Cart is empty" when there are no products', () => {
+    const wrapper = mount(Cart);
+
+    expect(wrapper.text()).toContain('Cart is empty');
+  });
 });
