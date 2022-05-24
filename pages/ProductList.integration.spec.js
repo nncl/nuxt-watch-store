@@ -50,6 +50,7 @@ describe('Product List - integration', () => {
       axios.get.mockReturnValue(Promise.resolve({ data: { products } }));
     }
 
+    // shallowMount mounts only the parent component, all children are stubs
     const wrapper = mount(ProductList, {
       mocks: {
         $axios: axios,
