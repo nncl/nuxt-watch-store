@@ -50,7 +50,12 @@ describe('Product List - integration', () => {
       axios.get.mockReturnValue(Promise.resolve({ data: { products } }));
     }
 
-    // shallowMount mounts only the parent component, all children are stubs
+    /*
+     * shallowMount mounts only the parent component, all children are stubs
+     *
+     * Also, every child dependency you'll have to implement as well, so imagine
+     * that...That's why we should keep most components as stateless and some as stateful.
+     */
     const wrapper = mount(ProductList, {
       mocks: {
         $axios: axios,
