@@ -1,11 +1,7 @@
 <template>
   <div class="flex justify-between mt-6">
     <div class="flex">
-      <img
-        class="h-20 w-20 object-cover rounded"
-        src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-        alt=""
-      />
+      <img class="h-20 w-20 object-cover rounded" :src="product.image" alt="" />
       <div class="mx-3">
         <h3 class="text-sm text-gray-600">{{ product.title }}</h3>
         <div class="flex items-center mt-2">

@@ -45,6 +45,7 @@ export default {
     addToCart() {
       this.$emit('addToCart', { product: this.product });
       cartState.open = true;
+      cartState.items.push(this.product);
     },
   },
 };
