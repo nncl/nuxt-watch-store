@@ -14,6 +14,8 @@ describe('CartManager - unit', () => {
     server.shutdown();
   });
 
+  it.todo('should return the state');
+
   it('should set cart to open', () => {
     const state = manager.open();
     expect(state.open).toBe(true);
@@ -33,13 +35,55 @@ describe('CartManager - unit', () => {
     expect(state.items).toHaveLength(1);
   });
 
-  it.todo('should remove product from cart');
+  it('should remove product from cart', () => {
+    const product = server.create('product');
+    manager.addProduct(product);
+    const state = manager.removeProduct(product.id);
 
-  it.todo('should clear products');
+    expect(state.items).toHaveLength(0);
+  });
 
-  it.todo('should clear cart');
+  it('should clear products', () => {
+    const product1 = server.create('product');
+    const product2 = server.create('product');
 
-  it.todo('should return true if cart is NOT empty');
+    manager.addProduct(product1);
+    manager.addProduct(product2);
 
-  it.todo('should return true if product is already in the cart');
+    const state = manager.clearProducts();
+    expect(state.items).toHaveLength(0);
+  });
+
+  it('should clear cart', () => {
+    const product1 = server.create('product');
+    const product2 = server.create('product');
+
+    manager.addProduct(product1);
+    manager.addProduct(product2);
+    manager.open();
+
+    const state = manager.clearCart();
+    expect(state.items).toHaveLength(0);
+    expect(state.open).toBe(false);
+  });
+
+  it('should return true if cart is NOT empty', () => {
+    const product1 = server.create('product');
+    const product2 = server.create('product');
+
+    manager.addProduct(product1);
+    manager.addProduct(product2);
+
+    expect(manager.hasProducts()).toBe(true);
+  });
+
+  it('should return true if product is already in the cart', () => {
+    const product = server.create('product', {
+      id: 99,
+    });
+
+    manager.addProduct(product);
+
+    expect(manager.isProductInTheCart(product)).toBe(true);
+  });
 });

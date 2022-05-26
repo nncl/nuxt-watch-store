@@ -22,12 +22,36 @@ export class CartManager {
     return this.state;
   }
 
-  addProduct(product) {
-    const exists = !!this.state.items.find(({ id }) => id === product.id);
+  isProductInTheCart(product) {
+    return !!this.state.items.find(({ id }) => id === product.id);
+  }
 
-    if (!exists) {
+  hasProducts() {
+    return !!this.state.items.length;
+  }
+
+  addProduct(product) {
+    if (!this.isProductInTheCart(product)) {
       this.state.items.push(product);
     }
+
+    return this.state;
+  }
+
+  removeProduct(id) {
+    this.state.items = this.state.items.filter((item) => item.id !== id);
+
+    return this.state;
+  }
+
+  clearProducts() {
+    this.state.items = [];
+    return this.state;
+  }
+
+  clearCart() {
+    this.clearProducts();
+    this.close();
 
     return this.state;
   }
