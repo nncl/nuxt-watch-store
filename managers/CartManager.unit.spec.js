@@ -14,7 +14,18 @@ describe('CartManager - unit', () => {
     server.shutdown();
   });
 
-  it.todo('should return the state');
+  it('should return the state', () => {
+    const product = server.create('product');
+    manager.addProduct(product);
+    manager.open();
+
+    const state = manager.getState();
+
+    expect(state).toEqual({
+      items: [product],
+      open: true,
+    });
+  });
 
   it('should set cart to open', () => {
     const state = manager.open();
