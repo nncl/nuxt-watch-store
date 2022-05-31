@@ -4,6 +4,12 @@
       <img class="h-20 w-20 object-cover rounded" :src="product.image" alt="" />
       <div class="mx-3">
         <h3 class="text-sm text-gray-600">{{ product.title }}</h3>
+        <button
+          data-testid="remove-item"
+          @click="$cart.removeProduct(product.id)"
+        >
+          Remove
+        </button>
         <div class="flex items-center mt-2">
           <button
             data-testid="-"
