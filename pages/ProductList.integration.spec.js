@@ -33,7 +33,7 @@ describe('Product List - integration', () => {
       );
     }
 
-    return [...server.createList('product', 10), ...overrideList];
+    return [...server.createList('product', quantity), ...overrideList];
   };
 
   const mountProductList = async (
@@ -148,5 +148,19 @@ describe('Product List - integration', () => {
     const cards = wrapper.findAllComponents(ProductCard);
     expect(wrapper.vm.searchTerm).toEqual('');
     expect(cards).toHaveLength(11);
+  });
+
+  it('should display the total quantity of products', async () => {
+    const { wrapper } = await mountProductList(44);
+    const label = wrapper.find('[data-testid="quantity-label"]');
+
+    expect(label.text()).toEqual('44 Products');
+  });
+
+  it('should display product (singular) when there is only 1 product', async () => {
+    const { wrapper } = await mountProductList(1);
+    const label = wrapper.find('[data-testid="quantity-label"]');
+
+    expect(label.text()).toEqual('1 Product');
   });
 });
