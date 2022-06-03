@@ -1,7 +1,5 @@
 # watch-store
 
-STARTING https://curso.javascript.tv.br/lecture/testar-aplicacoes-javascript-modulo2-intermission-2
-
 ## Build Setup
 
 ```bash
