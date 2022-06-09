@@ -12,8 +12,6 @@ context('Store', () => {
   });
 
   it.only('should display the store', () => {
-    // server.createList('product', 10);
-
     cy.visit('http://localhost:3000');
 
     cy.get('body').contains('Brand');
