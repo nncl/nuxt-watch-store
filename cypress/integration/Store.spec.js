@@ -11,10 +11,36 @@ context('Store', () => {
     server.shutdown();
   });
 
-  it.only('should display the store', () => {
+  it('should display the store', () => {
     cy.visit('http://localhost:3000');
 
     cy.get('body').contains('Brand');
     cy.get('body').contains('Wrist Watch');
+  });
+
+  context('Store > Search for products', () => {
+    it('should type in the search field', () => {
+      cy.visit('http://localhost:3000');
+
+      cy.get('input[type="search"]')
+        .type('Hello world')
+        .should('have.value', 'Hello world');
+    });
+
+    it('should type in the search field', () => {
+      server.create('product', {
+        title: 'Awesome watch',
+      });
+
+      server.createList('product', 10);
+
+      cy.visit('http://localhost:3000');
+
+      cy.get('input[type="search"]').type('Awesome watch');
+
+      cy.get('[data-testid="search-form"]').submit();
+
+      cy.get('[data-testid="card-list"]').should('have.length', 1);
+    });
   });
 });
