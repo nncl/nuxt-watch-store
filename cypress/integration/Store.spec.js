@@ -27,19 +27,15 @@ context('Store', () => {
         .should('have.value', 'Hello world');
     });
 
-    it('should type in the search field', () => {
+    it('should return 1 product when "Awesome watch" is used as search term', () => {
       server.create('product', {
         title: 'Awesome watch',
       });
-
       server.createList('product', 10);
 
       cy.visit('http://localhost:3000');
-
       cy.get('input[type="search"]').type('Awesome watch');
-
       cy.get('[data-testid="search-form"]').submit();
-
       cy.get('[data-testid="card-list"]').should('have.length', 1);
     });
   });
