@@ -38,5 +38,15 @@ context('Store', () => {
       cy.get('[data-testid="search-form"]').submit();
       cy.get('[data-testid="card-list"]').should('have.length', 1);
     });
+
+    it('should not return any product', () => {
+      server.createList('product', 10);
+
+      cy.visit('http://localhost:3000');
+      cy.get('input[type="search"]').type('Awesome watch');
+      cy.get('[data-testid="search-form"]').submit();
+      cy.get('[data-testid="card-list"]').should('have.length', 0);
+      cy.get('body').contains('0 Products');
+    });
   });
 });
