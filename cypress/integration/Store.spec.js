@@ -21,18 +21,38 @@ context('Store', () => {
   });
 
   context('Store > Shopping Cart', () => {
-    it('should not display shopping cart when page first loads', () => {
+    beforeEach(() => {
+      server.createList('product', 10);
       cy.visit('/');
+    });
+
+    it('should not display shopping cart when page first loads', () => {
       gid('shopping-cart').should('have.class', 'hidden');
     });
 
     it('should toggle shopping cart visibility cart when button is clicked', () => {
-      cy.visit('/');
       gid('toggle-cart').as('toggleButton');
       g('@toggleButton').click();
       gid('shopping-cart').should('not.have.class', 'hidden');
       g('@toggleButton').click({ force: true });
       gid('shopping-cart').should('have.class', 'hidden');
+    });
+
+    it('should open open shopping cart when product is added', () => {
+      gid('card-list').first().find('button').click();
+      gid('shopping-cart').should('not.have.class', 'hidden');
+    });
+
+    it('should add first product to the cart', () => {
+      gid('card-list').first().find('button').click();
+      gid('cart-list').should('have.length', 1);
+    });
+
+    it('should add 3 products to the cart', () => {
+      gid('card-list').eq(1).find('button').click();
+      gid('card-list').eq(3).find('button').click({ force: true });
+      gid('card-list').eq(5).find('button').click({ force: true });
+      gid('cart-list').should('have.length', 3);
     });
   });
 
