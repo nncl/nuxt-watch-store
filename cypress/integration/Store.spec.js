@@ -21,8 +21,10 @@ context('Store', () => {
   });
 
   context('Store > Shopping Cart', () => {
+    const quantity = 10;
+
     beforeEach(() => {
-      server.createList('product', 10);
+      server.createList('product', quantity);
       cy.visit('/');
     });
 
@@ -49,10 +51,18 @@ context('Store', () => {
     });
 
     it('should add 3 products to the cart', () => {
-      gid('card-list').eq(1).find('button').click();
-      gid('card-list').eq(3).find('button').click({ force: true });
-      gid('card-list').eq(5).find('button').click({ force: true });
+      cy.addToCart([1, 3, 5]);
       gid('cart-list').should('have.length', 3);
+    });
+
+    it('should add 1 product to the cart', () => {
+      cy.addToCart(3);
+      gid('cart-list').should('have.length', 1);
+    });
+
+    it('should add all products to the cart', () => {
+      cy.addToCart('all');
+      gid('cart-list').should('have.length', quantity);
     });
   });
 
