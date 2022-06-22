@@ -7,7 +7,7 @@
     <div class="flex items-center justify-between">
       <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
       <button
-        :hidden="hasProducts"
+        :hidden="!hasProducts"
         data-testid="clear-cart-button"
         @click="$cart.clearProducts()"
       >
