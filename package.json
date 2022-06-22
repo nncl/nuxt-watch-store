@@ -12,11 +12,13 @@
     "lint": "yarn lint:js && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "prepare": "husky install",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
-    "test:e2e": "start-server-and-test dev 3000 cypress:open"
+    "test:e2e": "start-server-and-test dev 3000 cypress:open",
+    "test:e2e:headless": "start-server-and-test dev 3000 cypress:run"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint --cache",
