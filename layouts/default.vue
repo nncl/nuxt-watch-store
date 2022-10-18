@@ -97,7 +97,13 @@
         </nav>
       </div>
     </header>
-    <cart :products="products" :is-open="isCartOpen" @close="toggleCart" />
+    <cart
+      :products="products"
+      :is-open="isCartOpen"
+      @close="toggleCart"
+      @checkout="checkout"
+    />
+    <h2 v-if="hasError" data-testid="error-message">{{ errorMessage }}</h2>
     <nuxt />
     <footer class="bg-gray-200">
       <div
@@ -117,6 +123,11 @@ import Cart from '@/components/Cart';
 
 export default {
   components: { Cart },
+  data() {
+    return {
+      errorMessage: '',
+    };
+  },
   computed: {
     isCartOpen() {
       return this.$cart.getState().open;
@@ -126,6 +137,16 @@ export default {
     },
   },
   methods: {
+    async checkout({ email }) {
+      try {
+        const products = this.$cart.getState().items;
+        this.$axios.setHeader('email', email);
+        await this.$axios.post('/api/order', { products });
+        this.$cart.clearProducts();
+      } catch (error) {
+        this.errorMessage = 'Fail to save order';
+      }
+    },
     toggleCart() {
       if (this.$cart.getState().open) {
         this.$cart.close();
