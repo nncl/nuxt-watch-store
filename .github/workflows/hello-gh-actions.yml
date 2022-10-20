@@ -12,5 +12,18 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Say hello to the world!
-        run: echo 'Hello world'
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.18.x
+        
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+
+    - name: Run Jest tests
+      run: yarn test
