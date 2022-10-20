@@ -20,10 +20,13 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 12.18.x
+        node-version: 14
         
     - name: Install dependencies
       run: yarn --frozen-lockfile
 
     - name: Run Jest tests
       run: yarn test
+      
+    - name: Run Linter
+      run: yarn lint
