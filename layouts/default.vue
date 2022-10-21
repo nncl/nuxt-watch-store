@@ -103,7 +103,7 @@
       @close="toggleCart"
       @checkout="checkout"
     />
-    <h2 v-if="hasError" data-testid="error-message">{{ errorMessage }}</h2>
+    <h2 v-if="errorMessage" data-testid="error-message">{{ errorMessage }}</h2>
     <nuxt />
     <footer class="bg-gray-200">
       <div
