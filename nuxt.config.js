@@ -1,4 +1,6 @@
 export default {
+  target: 'static',
+  ssr: false,
   mode: process.env.NODE_ENV === 'production' ? 'universal' : 'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
