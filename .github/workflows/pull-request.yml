@@ -31,5 +31,8 @@ jobs:
       - name: Run Linter
         run: yarn lint
 
-      - name: Jest Coverage Comment
-        uses: MishaKav/jest-coverage-comment@main
+      - name: Comment with Test Coverage
+        uses: dkershner6/jest-coverage-commenter-action@v1
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          test_command: "yarn test:coverage"
