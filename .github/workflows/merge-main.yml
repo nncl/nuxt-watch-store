@@ -35,10 +35,8 @@ jobs:
       - name: Build App
         run: yarn generate
 
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
+      - name: Comment with Test Coverage
+        uses: dkershner6/jest-coverage-commenter-action@v1
         with:
-          args: deploy --dir=dist --functions=functions --prod
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          test_command: "yarn test:coverage"
