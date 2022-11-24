@@ -30,3 +30,6 @@ jobs:
 
       - name: Run Linter
         run: yarn lint
+
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
