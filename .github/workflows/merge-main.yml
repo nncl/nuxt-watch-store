@@ -42,7 +42,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
+            ✅ ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
 
             Repository: ${{ github.repository }}
@@ -56,7 +56,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
+            🚨 ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
 
             Repository: ${{ github.repository }}
