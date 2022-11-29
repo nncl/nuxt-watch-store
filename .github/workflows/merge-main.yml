@@ -32,11 +32,29 @@ jobs:
       - name: Run Linter
         run: yarn lint
 
+      - name: On purpose failure
+        run: exit 1
+
       - name: Build App
         run: yarn generate
 
-      - name: send telegram message on push
+      - name: send telegram message on push - success
         uses: appleboy/telegram-action@master
+        if: ${{ success() }}
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+      - name: send telegram message on push - error
+        uses: appleboy/telegram-action@master
+        if: ${{ failure() }}
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
