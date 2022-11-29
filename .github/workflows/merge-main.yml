@@ -32,9 +32,6 @@ jobs:
       - name: Run Linter
         run: yarn lint
 
-      - name: On purpose failure
-        run: exit 1
-
       - name: Build App
         run: yarn generate
 
